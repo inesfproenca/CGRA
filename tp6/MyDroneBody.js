@@ -4,7 +4,7 @@ function MyDroneBody(scene) {
 
 	this.arm = new MyCylinder(this.scene,5,3);
 	this.helixBase = new MyCylinder(this.scene,5,1);
-	this.body = new MySemiSphere(this.scene,6,5);
+	this.body = new MySemiSphere(this.scene,8,7);
 
 };
 

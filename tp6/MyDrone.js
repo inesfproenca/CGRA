@@ -23,18 +23,29 @@ function MyDrone(scene) {
 
 	//Materials
 	this.droneApperances = [];
+	this.droneAuxApperances = [];
 
-	this.teste = new CGFappearance(this.scene);
-	this.teste.loadTexture("../resources/images/teste.png");
-	this.droneApperances.push(this.teste);
+	var teste = new CGFappearance(this.scene);
+	teste.loadTexture("../resources/images/teste.png");
+	this.droneApperances.push(teste);
+
+	var testeAux = new CGFappearance(this.scene);
+	testeAux.setDiffuse(0,1,0,1);	
+
+	this.droneAuxApperances.push(testeAux);
 	
-	this.camuflage= new CGFappearance(this.scene);
-	this.camuflage.loadTexture("../resources/images/camuflage.png");
-	this.droneApperances.push(this.camuflage);
+	var star= new CGFappearance(this.scene);
+	star.loadTexture("../resources/images/star.png");
+	this.droneApperances.push(star);
 
-	this.circuits = new CGFappearance(this.scene);
-	this.circuits.loadTexture("../resources/images/circuits.png");
-	this.droneApperances.push(this.circuits);
+	var camuflage= new CGFappearance(this.scene);
+	camuflage.loadTexture("../resources/images/camuflage.png");
+	this.droneAuxApperances.push(camuflage);
+
+	var circuits = new CGFappearance(this.scene);
+	circuits.loadTexture("../resources/images/circuits.png");
+	this.droneApperances.push(circuits);
+	this.droneAuxApperances.push(circuits);
 
 };
 
@@ -46,30 +57,18 @@ MyDrone.prototype.display = function(){
 	this.scene.rotate(this.angle,0,1,0);
 	this.scene.rotate(this.tilt,1,0,0);
 
-/*
-	if(this.scene.currDroneAppearance == 'Camuflage')
-		this.camuflageAppearance.apply();
-	if(this.scene.currDroneAppearance == 'Teste')
-		this.testAppearance.apply();
-	if(this.scene.currDroneAppearance == 'Circuits')
-		this.circuitAppearance.apply();
-*/
 	this.droneApperances[this.scene.currDroneAppearance].apply();
 
 	//Draw Body
 	this.scene.pushMatrix();
-		this.scene.translate(0,0.4,0);
+		this.scene.translate(0,0.35,0);
 		this.body.display();
 	this.scene.popMatrix();
 
+	this.droneAuxApperances[this.scene.currDroneAppearance].apply();
+
 	//Draw Legs
 	this.scene.pushMatrix();
-		this.scene.translate(0.35,0,0);
-		this.leg.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();
-		this.scene.translate(-0.35,0,0);
 		this.leg.display();
 	this.scene.popMatrix();
 
@@ -120,7 +119,7 @@ MyDrone.prototype.rotateRight = function(){
 };
 
 MyDrone.prototype.moveForward = function(){
-	this.tilt = Math.PI/12;
+	this.tilt = Math.PI/20;
 
 	this.frontHelix.setSpeed(this.slow);
 	this.backHelix.setSpeed(this.fast);
@@ -137,7 +136,7 @@ MyDrone.prototype.moveForward = function(){
 };
 
 MyDrone.prototype.moveBackward = function(){
-	this.tilt = -Math.PI/12;
+	this.tilt = -Math.PI/20;
 
 	this.frontHelix.setSpeed(this.fast);
 	this.backHelix.setSpeed(this.slow);
@@ -188,8 +187,10 @@ MyDrone.prototype.static = function(){
 
 MyDrone.prototype.update = function(currTime) {
 
-	if(this.time == 0)
+	if(this.time == 0){
 		this.time = currTime;
+		this.static();
+	}
 	else{
 		var difTime = currTime - this.time;
 		this.frontHelix.updateAngle(difTime);

@@ -3,8 +3,8 @@ function MyDroneLeg(scene) {
 
 	this.scene = scene;
 
-	this.conection = new MyCurvedSurface(this.scene, 4);
-	this.base = new MyPrism(this.scene,4 ,1);
+	this.conection = new MyCurvedSurface(this.scene, 6);
+	this.base = new MyUnitCubeQuad(this.scene);
 
 };
 
@@ -15,17 +15,27 @@ MyDroneLeg.prototype.display = function(){
 	
 	//Draw base
 	this.scene.pushMatrix();
-		this.scene.translate(0, 0, -.7);
-		this.scene.scale(0.1,0.05,1.4);
-		this.scene.rotate(-Math.PI/4, 0,0,1);
+		this.scene.translate(0.35, 0.025, 0);
+		this.scene.scale(0.15,0.05,1.4);
+		this.base.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+		this.scene.translate(-0.35, 0.025, 0);
+		this.scene.scale(0.15,0.05,1.4);
 		this.base.display();
 	this.scene.popMatrix();
 
 	//Draw connection
 	this.scene.pushMatrix();
-		this.scene.translate(0.06, 0.05, 0);
-		this.scene.rotate(-Math.PI/2, 0,1,0);
-		this.scene.scale(0.7,0.3,.15);
+		this.scene.translate(0, 0.05, 0.25);
+		this.scene.scale(0.35,0.3,0.15);
+		this.conection.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+		this.scene.translate(0, 0.05, -0.375);
+		this.scene.scale(0.35,0.3,0.15);
 		this.conection.display();
 	this.scene.popMatrix();
 }
