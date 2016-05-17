@@ -2,10 +2,11 @@
  * MyCurvedSurface
  * @constructor
  */
- function MyCurvedSurface(scene, slices) {
+ function MyCurvedSurface(scene, nrDivs) {
  	CGFobject.call(this,scene);
-	
-	this.slices = slices;
+
+ 	this.scene = scene;
+	this.nrDivs = nrDivs;
 
  	this.initBuffers();
  };
@@ -15,29 +16,29 @@
 
  MyCurvedSurface.prototype.initBuffers = function() {
 
- 	var ang = Math.PI/(2*this.slices);
+ 	var tmp = 1/this.nrDivs;
 
  	this.vertices = [];
  	this.texCoords = [];
  	for(var j = 0; j <= 1; j++){
-		for (var i = 0; i <= this.slices; i++) {
-			this.vertices.push(Math.cos(i*ang),Math.sin(i*ang),j);
-			this.texCoords.push(i/this.slices, j);
+		for (var i = 0; i <= this.nrDivs; i++) {
+			this.vertices.push(i*tmp,1-(i*tmp)*(i*tmp),j);
+			this.texCoords.push(i/this.nrDivs, j);
 		}
 	}
 
  	this.indices = [];
-	for (var i = 0; i < this.slices; i++) {
- 		this.indices.push(i,i+1,i+this.slices+1);
- 		this.indices.push(i+1,i+this.slices+2,i+this.slices+1);
- 		this.indices.push(i+this.slices+1,i+1,i);
- 		this.indices.push(i+this.slices+1,i+this.slices+2,i+1);
+	for (var i = 0; i < this.nrDivs; i++) {
+ 		this.indices.push(i,i+1,i+this.nrDivs+1);
+ 		this.indices.push(i+1,i+this.nrDivs+2,i+this.nrDivs+1);
+ 		this.indices.push(i+this.nrDivs+1,i+1,i);
+ 		this.indices.push(i+this.nrDivs+1,i+this.nrDivs+2,i+1);
 	}
 
  	this.normals = [];
  	for(var j = 0; j <= 1; j++){
-		for (var i = 0; i <= this.slices; i++) {
-			this.normals.push(Math.cos(i*ang), Math.sin(i*ang), 0);
+		for (var i = 0; i <= this.nrDivs; i++) {
+			this.normals.push(i*tmp,1-(i*tmp)*(i*tmp), 0);
 		}
 	}
 

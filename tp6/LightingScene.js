@@ -222,6 +222,7 @@ LightingScene.prototype.display = function() {
 	// ---- BEGIN Primitive drawing section
 
 	// Floor
+	
 	this.floorAppearance.apply();
 	this.pushMatrix();
 		this.translate(7.5, 0, 7.5);
@@ -330,11 +331,12 @@ LightingScene.prototype.display = function() {
 		this.rotate(this.plane.angle,0,0,1);
 		this.plane.display();
 	this.popMatrix();
-
+	
 	//Drone
 	this.pushMatrix();
 		this.drone.display();
 	this.popMatrix();
+
 	
 	// ---- END Primitive drawing section
 };

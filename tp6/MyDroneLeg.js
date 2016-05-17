@@ -3,7 +3,7 @@ function MyDroneLeg(scene) {
 
 	this.scene = scene;
 
-	this.conection = new MyCurvedSurface(this.scene, 6);
+	this.conection = new MyCurvedSurface(this.scene, 8);
 	this.base = new MyUnitCubeQuad(this.scene);
 
 };
