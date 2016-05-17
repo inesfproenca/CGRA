@@ -20,12 +20,6 @@ MyDroneLeg.prototype.display = function(){
 		this.base.display();
 	this.scene.popMatrix();
 
-	this.scene.pushMatrix();
-		this.scene.translate(-0.35, 0.025, 0);
-		this.scene.scale(0.15,0.05,1.4);
-		this.base.display();
-	this.scene.popMatrix();
-
 	//Draw connection
 	this.scene.pushMatrix();
 		this.scene.translate(0, 0.05, 0.25);

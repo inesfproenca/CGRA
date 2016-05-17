@@ -15,7 +15,7 @@
 
  MyCurvedSurface.prototype.initBuffers = function() {
 
- 	var ang = Math.PI/this.slices;
+ 	var ang = Math.PI/(2*this.slices);
 
  	this.vertices = [];
  	this.texCoords = [];

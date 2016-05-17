@@ -23,16 +23,6 @@ function MyDrone(scene) {
 
 	//Materials
 	this.droneApperances = [];
-	this.droneAuxApperances = [];
-
-	var teste = new CGFappearance(this.scene);
-	teste.loadTexture("../resources/images/teste.png");
-	this.droneApperances.push(teste);
-
-	var testeAux = new CGFappearance(this.scene);
-	testeAux.setDiffuse(0,1,0,1);	
-
-	this.droneAuxApperances.push(testeAux);
 	
 	var star= new CGFappearance(this.scene);
 	star.loadTexture("../resources/images/star.png");
@@ -40,13 +30,19 @@ function MyDrone(scene) {
 
 	var camuflage= new CGFappearance(this.scene);
 	camuflage.loadTexture("../resources/images/camuflage.png");
-	this.droneAuxApperances.push(camuflage);
+	this.droneApperances.push(camuflage);
 
 	var circuits = new CGFappearance(this.scene);
 	circuits.loadTexture("../resources/images/circuits.png");
 	this.droneApperances.push(circuits);
-	this.droneAuxApperances.push(circuits);
 
+	var arrow = new CGFappearance(this.scene);
+	arrow.loadTexture("../resources/images/arrow.png");
+	this.droneApperances.push(arrow);
+
+	this.blackApperance = new CGFappearance(this.scene);
+	this.blackApperance.setAmbient(0,0,0,1);
+	this.blackApperance.setDiffuse(0,0,0,1);
 };
 
 MyDrone.prototype = Object.create(CGFobject.prototype);
@@ -65,14 +61,20 @@ MyDrone.prototype.display = function(){
 		this.body.display();
 	this.scene.popMatrix();
 
-	this.droneAuxApperances[this.scene.currDroneAppearance].apply();
-
 	//Draw Legs
 	this.scene.pushMatrix();
+		this.scene.translate(0.25,0,0);
+		this.leg.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+		this.scene.translate(-0.25,0,0);
+		this.scene.rotate(Math.PI,0,1,0);
 		this.leg.display();
 	this.scene.popMatrix();
 
 	//Draw helixes
+	this.blackApperance.apply();
 	this.scene.pushMatrix();
 		this.scene.translate(0,0.5,0.95);
 		this.scene.scale(0.25,0.25,0.25);

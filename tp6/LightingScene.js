@@ -60,7 +60,7 @@ LightingScene.prototype.init = function(application) {
 	this.wallpaper.loadTexture("../resources/images/wallpaper.png");
 	
 	this.windowAppearance = new CGFappearance(this);
-	this.windowAppearance.setAmbient(0.3,0.3,0.3,1);4
+	this.windowAppearance.setAmbient(0.3,0.3,0.3,1);
 	this.windowAppearance.setDiffuse(0.5, 0.5, 0.5,1);
 	this.windowAppearance.setSpecular(0.2,0.2,0.2,1);	
 	this.windowAppearance.setShininess(70);
@@ -105,7 +105,7 @@ LightingScene.prototype.init = function(application) {
 	this.run = true;
 
 	this.currDroneAppearance = 0;
-	this.droneAppearanceList = {'teste': 0, 'camuflage': 1, 'circuits': 2};
+	this.droneAppearanceList = {'estrela': 0, 'camuflage': 1, 'circuits': 2, 'arrow': 3};
 	
 	this.speed=1;
 };
