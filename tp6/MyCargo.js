@@ -44,8 +44,8 @@ MyCargo.prototype.update = function() {
 		this.z >= this.scene.drone.z - 1 && this.z <= this.scene.drone.z + 1)
 		this.isHooked = true;
 		
-	if(this.x >= this.scene.target.x - 0.5 && this.x <= this.scene.target.x + 0.5 &&
-		this.z >= this.scene.target.z - 0.5 && this.z <= this.scene.target.z + 0.5)
+	if(this.x >= this.scene.target.getX() - 0.5 && this.x <= this.scene.target.getX() + 0.5 &&
+		this.z >= this.scene.target.getZ() - 0.5 && this.z <= this.scene.target.getZ() + 0.5)
 		this.isHooked = false;
 	
 	if(this.isHooked){

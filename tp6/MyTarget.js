@@ -32,14 +32,10 @@ MyTarget.prototype.display = function () {
 	
 };
 
-/*
-MyTarget.prototype.update = function(currTime) {
-			var time = currTime / 1000;
-			var sec = time % 60;
-			var min = (time/60)%60;
-			var hour = (time/3600)%12;
+MyTarget.prototype.getX = function() {
+	return this.x;
+};
 
-			this.secHand.setAngle(sec*6);
-			this.minHand.setAngle(min*6);
-			this.hourHand.setAngle(hour*30);
-};*/
+MyTarget.prototype.getZ = function() {
+	return this.z;
+};
