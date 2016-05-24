@@ -69,7 +69,9 @@ serialInclude([
 'MyDroneBody.js', 
 'MyDroneLeg.js', 
 'MyCurvedSurface.js', 
-'MyDroneHelix.js', 
+'MyDroneHelix.js',
+'MyTarget.js',
+'MyCargo.js',
 
 
 main = function() {

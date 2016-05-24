@@ -45,6 +45,8 @@ LightingScene.prototype.init = function(application) {
 	this.clock = new MyClock(this);
 	this.plane = new MyPaperPlane(this);
 	this.drone = new MyDrone(this);
+	this.target = new MyTarget(this);
+	this.cargo = new MyCargo(this);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);	
@@ -337,6 +339,16 @@ LightingScene.prototype.display = function() {
 		this.drone.display();
 	this.popMatrix();
 
+	//Target
+	this.pushMatrix();
+		this.target.display();
+	this.popMatrix();
+
+	//Cargo
+	this.pushMatrix();
+		this.cargo.display();
+	this.popMatrix();
+
 	
 	// ---- END Primitive drawing section
 };
@@ -352,6 +364,8 @@ LightingScene.prototype.update = function(currTime) {
 
 		if(this.drone)
 			this.drone.update(currTime);
+
+		this.cargo.update();
 	}
 
 };
