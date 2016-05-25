@@ -7,6 +7,7 @@ function MyCargo(scene) {
 	CGFobject.call(this, scene);
 
 	this.isHooked = false;
+	this.appearance;
 
 	this.body= new MyUnitCubeQuad(this.scene);
 	this.x = 5.0;
@@ -18,6 +19,11 @@ function MyCargo(scene) {
 	
 	this.cargoAppearance = new CGFappearance(this.scene);;
 	this.cargoAppearance.loadTexture("../resources/images/cargo.png");
+
+	this.steelBoxApperance = new CGFappearance(this.scene);;
+	this.steelBoxApperance.loadTexture("../resources/images/steel-box.png");
+	
+	this.appearance = this.cargoAppearance;
 };
 
 MyCargo.prototype = Object.create(CGFobject.prototype);
@@ -27,7 +33,7 @@ MyCargo.prototype.display = function () {
 	this.scene.translate(this.x , this.y , this.z);
 	
 	this.scene.pushMatrix();
-	this.cargoAppearance.apply();
+	this.appearance.apply();
 	this.body.display();
 	this.scene.popMatrix();
 
@@ -47,14 +53,17 @@ MyCargo.prototype.checkColision = function() {
 
 	if(this.x >= this.scene.drone.x - tolerance && this.x <= this.scene.drone.x + tolerance &&
 		this.z >= this.scene.drone.z - tolerance && this.z <= this.scene.drone.z + tolerance &&
-		this.y + 0.5 >= this.scene.drone.getHeight() - tolerance && this.y + 0.5 <= this.scene.drone.getHeight() + tolerance)
+		this.y + 0.5 >= this.scene.drone.getHeight() - tolerance && this.y + 0.5 <= this.scene.drone.getHeight() + tolerance){
 		this.isHooked = true;
+		this.appearance = this.steelBoxApperance;
+	}
 		
 	if(this.x >= this.scene.target.getX() - tolerance && this.x <= this.scene.target.getX() + tolerance &&
 		this.z >= this.scene.target.getZ() - tolerance && this.z <= this.scene.target.getZ() + tolerance){
 		this.isHooked = false;
 		this.falling = true;
-		}
+		this.appearance = this.cargoAppearance;
+	}
 }
 
 MyCargo.prototype.update = function(currTime) {
