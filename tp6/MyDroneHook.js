@@ -17,6 +17,21 @@ MyDroneHook.prototype.getLength = function (){
 	return this.length;
 }
 
+MyDroneHook.prototype.down = function(){
+	this.h += 0.3;
+
+	if(this.h*0.1>this.scene.drone.height)
+		this.h=this.scene.drone.height/0.1;
+
+}
+
+MyDroneHook.prototype.up = function(){
+	this.h -= 0.3;
+	
+	if (this.h<4)
+		this.h=4;
+}
+
 MyDroneHook.prototype.display = function () {
 
 	this.scene.pushMatrix();

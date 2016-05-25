@@ -7,8 +7,8 @@ function MyDrone(scene) {
 	this.medium = 1.0;
 	this.fast = 10.0;
 	this.ang=Math.PI/4;
-	this.h=12;
-	this.ab = Math.PI/6;
+	var h=12;
+	var ab = Math.PI/6;
 
 	this.body = new MyDroneBody(this.scene);
 	this.leg = new MyDroneLeg(this.scene);
@@ -16,7 +16,7 @@ function MyDrone(scene) {
 	this.backHelix = new MyDroneHelix(this.scene);
 	this.rightHelix = new MyDroneHelix(this.scene);
 	this.leftHelix = new MyDroneHelix(this.scene);
-	this.hook = new MyDroneHook(this.scene,this.ang,this.h,this.ab);
+	this.hook = new MyDroneHook(this.scene,this.ang,h,ab);
 	this.vel=1;
 	this.x=8;
 	this.z=9;
@@ -53,7 +53,7 @@ MyDrone.prototype = Object.create(CGFobject.prototype);
 MyDrone.prototype.constructor=MyDrone;
 
 MyDrone.prototype.getHeight = function(){
-	return this.height - ((this.h-4)*0.1 + Math.cos(this.ab)*0.1);
+	return this.height - ((this.hook.h-4)*0.1 + Math.cos(this.hook.ab)*0.1);
 }
 
 MyDrone.prototype.display = function(){
@@ -85,7 +85,7 @@ MyDrone.prototype.display = function(){
 
 	//Draw Hook
 	this.scene.pushMatrix();
-		this.scene.translate(0,-(this.h-4)*0.1,0);
+		this.scene.translate(0,-(this.hook.h-4)*0.1,0);
 		this.scene.scale(0.1,0.1,0.1);
 		this.hook.display();
 	this.scene.popMatrix();
@@ -199,6 +199,20 @@ MyDrone.prototype.moveDown = function(){
 
 	if(this.height < 0)
 		this.height = 0;
+};
+
+MyDrone.prototype.moveHookDown = function(){
+	this.hook.down();
+
+	if(this.height < 0)
+		this.height = 0;
+};
+
+MyDrone.prototype.moveHookUp = function(){
+	this.hook.up();
+
+	if(this.height > 8)
+		this.height = 8;
 };
 
 MyDrone.prototype.static = function(){

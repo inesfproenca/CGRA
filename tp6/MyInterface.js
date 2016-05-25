@@ -95,6 +95,14 @@ MyInterface.prototype.processKeyDown = function(event) {
 		case('j'):
 			this.scene.drone.moveDown();
 			break;
+		case('P'):
+		case('p'):
+			this.scene.drone.moveHookUp();
+			break;
+		case('L'):
+		case('l'):
+			this.scene.drone.moveHookDown();
+			break;
 	};
 };
 
