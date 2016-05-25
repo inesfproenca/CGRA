@@ -70,6 +70,8 @@ serialInclude([
 'MyDroneLeg.js', 
 'MyCurvedSurface.js', 
 'MyDroneHelix.js',
+'MyDroneHook.js',
+'MyHookLeg.js',
 'MyTarget.js',
 'MyCargo.js',
 

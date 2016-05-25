@@ -6,6 +6,10 @@ function MyDrone(scene) {
 	this.slow = 0.2;
 	this.medium = 1.0;
 	this.fast = 10.0;
+	this.ang=Math.PI/4;
+	this.h=12;
+	this.ab = Math.PI/6;
+	this.alt = (this.h-4)*0.1 + Math.cos(this.ab)*0.1;
 
 	this.body = new MyDroneBody(this.scene);
 	this.leg = new MyDroneLeg(this.scene);
@@ -13,6 +17,7 @@ function MyDrone(scene) {
 	this.backHelix = new MyDroneHelix(this.scene);
 	this.rightHelix = new MyDroneHelix(this.scene);
 	this.leftHelix = new MyDroneHelix(this.scene);
+	this.hook = new MyDroneHook(this.scene,this.ang,this.h,this.ab);
 	this.vel=1;
 	this.x=8;
 	this.z=9;
@@ -51,53 +56,68 @@ MyDrone.prototype.constructor=MyDrone;
 MyDrone.prototype.display = function(){
 	this.scene.translate(this.x, this.height, this.z);
 	this.scene.rotate(this.angle,0,1,0);
-	this.scene.rotate(this.tilt,1,0,0);
 
 	this.droneApperances[this.scene.currDroneAppearance].apply();
 
 	//Draw Body
 	this.scene.pushMatrix();
+		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(0,0.35,0);
 		this.body.display();
 	this.scene.popMatrix();
 
 	//Draw Legs
 	this.scene.pushMatrix();
+		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(0.25,0,0);
 		this.leg.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
+		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(-0.25,0,0);
 		this.scene.rotate(Math.PI,0,1,0);
 		this.leg.display();
 	this.scene.popMatrix();
 
+	//Draw Hook
+	this.scene.pushMatrix();
+		this.scene.translate(0,-(this.h-4)*0.1,0);
+		this.scene.scale(0.1,0.1,0.1);
+		this.hook.display();
+	this.scene.popMatrix();
+
 	//Draw helixes
 	this.blackApperance.apply();
 	this.scene.pushMatrix();
+		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(0,0.5,0.95);
 		this.scene.scale(0.25,0.25,0.25);
 		this.frontHelix.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
+		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(0,0.5,-0.95);
 		this.scene.scale(0.25,0.25,0.25);
 		this.backHelix.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
+		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(-0.95,0.5,0);
 		this.scene.scale(0.25,0.25,0.25);
 		this.rightHelix.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
+		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(0.95,0.5,0);
 		this.scene.scale(0.25,0.25,0.25);
 		this.leftHelix.display();
 	this.scene.popMatrix();
+
+
 	
 	this.scene.materialDefault.apply();
 };
