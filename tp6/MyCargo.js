@@ -12,6 +12,9 @@ function MyCargo(scene) {
 	this.x = 5.0;
 	this.y = 0.5;
 	this.z = 5.0;
+
+	this.falling = false;
+	this.time = 0;
 	
 	this.cargoAppearance = new CGFappearance(this.scene);;
 	this.cargoAppearance.loadTexture("../resources/images/cargo.png");
@@ -39,21 +42,41 @@ MyCargo.prototype.getZ = function() {
 	return this.z;
 }
 
-MyCargo.prototype.update = function() {
-	if(this.x >= this.scene.drone.x - 1 && this.x <= this.scene.drone.x + 1 &&
-		this.z >= this.scene.drone.z - 1 && this.z <= this.scene.drone.z + 1 &&
-		this.y + 0.5 >= this.scene.drone.getHeight() - 0.5 && this.y + 0.5 <= this.scene.drone.getHeight() + 0.5)
+MyCargo.prototype.checkColision = function() {
+	var tolerance = 0.5;
+
+	if(this.x >= this.scene.drone.x - tolerance && this.x <= this.scene.drone.x + tolerance &&
+		this.z >= this.scene.drone.z - tolerance && this.z <= this.scene.drone.z + tolerance &&
+		this.y + 0.5 >= this.scene.drone.getHeight() - tolerance && this.y + 0.5 <= this.scene.drone.getHeight() + tolerance)
 		this.isHooked = true;
 		
-	if(this.x >= this.scene.target.getX() - 0.5 && this.x <= this.scene.target.getX() + 0.5 &&
-		this.z >= this.scene.target.getZ() - 0.5 && this.z <= this.scene.target.getZ() + 0.5)
+	if(this.x >= this.scene.target.getX() - tolerance && this.x <= this.scene.target.getX() + tolerance &&
+		this.z >= this.scene.target.getZ() - tolerance && this.z <= this.scene.target.getZ() + tolerance){
 		this.isHooked = false;
-	
+		this.falling = true;
+		}
+}
+
+MyCargo.prototype.update = function(currTime) {
+	if(this.time == 0)
+		this.time = currTime;
+
+	this.checkColision();
+		
 	if(this.isHooked){
 		this.x = this.scene.drone.x;
 		this.z = this.scene.drone.z;
 		this.y = this.scene.drone.getHeight() - 0.5;
 	}
-	else
+	else if (this.falling){
+		var diffTime = currTime - this.time;
+		this.y -= 0.01*diffTime;
+	}
+
+	if(this.y <= 0.5){
+		this.falling = false;
 		this.y = 0.5;
+	}
+
+	this.time = currTime;
 }

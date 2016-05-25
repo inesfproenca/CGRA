@@ -365,7 +365,7 @@ LightingScene.prototype.update = function(currTime) {
 		if(this.drone)
 			this.drone.update(currTime);
 
-		this.cargo.update();
+		this.cargo.update(currTime);
 	}
 
 };
