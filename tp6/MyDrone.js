@@ -9,7 +9,6 @@ function MyDrone(scene) {
 	this.ang=Math.PI/4;
 	this.h=12;
 	this.ab = Math.PI/6;
-	this.alt = (this.h-4)*0.1 + Math.cos(this.ab)*0.1;
 
 	this.body = new MyDroneBody(this.scene);
 	this.leg = new MyDroneLeg(this.scene);
@@ -52,6 +51,10 @@ function MyDrone(scene) {
 
 MyDrone.prototype = Object.create(CGFobject.prototype);
 MyDrone.prototype.constructor=MyDrone;
+
+MyDrone.prototype.getHeight = function(){
+	return this.height - ((this.h-4)*0.1 + Math.cos(this.ab)*0.1);
+}
 
 MyDrone.prototype.display = function(){
 	this.scene.translate(this.x, this.height, this.z);

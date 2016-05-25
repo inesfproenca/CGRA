@@ -41,7 +41,8 @@ MyCargo.prototype.getZ = function() {
 
 MyCargo.prototype.update = function() {
 	if(this.x >= this.scene.drone.x - 1 && this.x <= this.scene.drone.x + 1 &&
-		this.z >= this.scene.drone.z - 1 && this.z <= this.scene.drone.z + 1)
+		this.z >= this.scene.drone.z - 1 && this.z <= this.scene.drone.z + 1 &&
+		this.y + 0.5 >= this.scene.drone.getHeight() - 0.5 && this.y + 0.5 <= this.scene.drone.getHeight() + 0.5)
 		this.isHooked = true;
 		
 	if(this.x >= this.scene.target.getX() - 0.5 && this.x <= this.scene.target.getX() + 0.5 &&
@@ -51,6 +52,7 @@ MyCargo.prototype.update = function() {
 	if(this.isHooked){
 		this.x = this.scene.drone.x;
 		this.z = this.scene.drone.z;
+		this.y = this.scene.drone.getHeight() - 0.5;
 	}
 	else
 		this.y = 0.5;
