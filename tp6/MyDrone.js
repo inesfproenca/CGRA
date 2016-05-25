@@ -83,13 +83,6 @@ MyDrone.prototype.display = function(){
 		this.leg.display();
 	this.scene.popMatrix();
 
-	//Draw Hook
-	this.scene.pushMatrix();
-		this.scene.translate(0,-(this.hook.h-4)*0.1,0);
-		this.scene.scale(0.1,0.1,0.1);
-		this.hook.display();
-	this.scene.popMatrix();
-
 	//Draw helixes
 	this.blackApperance.apply();
 	this.scene.pushMatrix();
@@ -120,6 +113,12 @@ MyDrone.prototype.display = function(){
 		this.leftHelix.display();
 	this.scene.popMatrix();
 
+	//Draw Hook
+	this.scene.pushMatrix();
+		this.scene.translate(0,-(this.hook.h-4)*0.1,0);
+		this.scene.scale(0.1,0.1,0.1);
+		this.hook.display();
+	this.scene.popMatrix();
 
 	
 	this.scene.materialDefault.apply();
