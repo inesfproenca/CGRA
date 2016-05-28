@@ -59,7 +59,8 @@ MyCargo.prototype.checkColision = function() {
 	}
 		
 	if(this.x >= this.scene.target.getX() - tolerance && this.x <= this.scene.target.getX() + tolerance &&
-		this.z >= this.scene.target.getZ() - tolerance && this.z <= this.scene.target.getZ() + tolerance){
+		this.z >= this.scene.target.getZ() - tolerance && this.z <= this.scene.target.getZ() + tolerance  &&
+		this.y + 0.5  <= 1){
 		this.isHooked = false;
 		this.falling = true;
 		this.appearance = this.cargoAppearance;

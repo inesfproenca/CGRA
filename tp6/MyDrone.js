@@ -17,7 +17,7 @@ function MyDrone(scene) {
 	this.rightHelix = new MyDroneHelix(this.scene);
 	this.leftHelix = new MyDroneHelix(this.scene);
 	this.hook = new MyDroneHook(this.scene,this.ang,h,ab);
-	this.vel=1;
+	this.vel=0.1;
 	this.x=8;
 	this.z=9;
 	this.height=5;
@@ -47,6 +47,10 @@ function MyDrone(scene) {
 	this.blackApperance = new CGFappearance(this.scene);
 	this.blackApperance.setAmbient(0,0,0,1);
 	this.blackApperance.setDiffuse(0,0,0,1);
+
+	this.redApperance = new CGFappearance(this.scene);
+	this.redApperance.setAmbient(1,0,0,1);
+	this.redApperance.setDiffuse(1,0,0,1);
 };
 
 MyDrone.prototype = Object.create(CGFobject.prototype);
@@ -84,7 +88,7 @@ MyDrone.prototype.display = function(){
 	this.scene.popMatrix();
 
 	//Draw helixes
-	this.blackApperance.apply();
+	this.redApperance.apply();
 	this.scene.pushMatrix();
 		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(0,0.5,0.95);
@@ -92,6 +96,7 @@ MyDrone.prototype.display = function(){
 		this.frontHelix.display();
 	this.scene.popMatrix();
 
+	this.blackApperance.apply();
 	this.scene.pushMatrix();
 		this.scene.rotate(this.tilt,1,0,0);
 		this.scene.translate(0,0.5,-0.95);
@@ -182,7 +187,7 @@ MyDrone.prototype.moveUp = function(){
 	this.rightHelix.setSpeed(this.fast);
 	this.leftHelix.setSpeed(this.fast);
 
-	this.height += 0.3;
+	this.height += 0.1;
 
 	if(this.height > 8)
 		this.height = 8;
@@ -194,7 +199,7 @@ MyDrone.prototype.moveDown = function(){
 	this.rightHelix.setSpeed(this.slow);
 	this.leftHelix.setSpeed(this.slow);
 
-	this.height -= 0.3;
+	this.height -= 0.1;
 
 	if(this.height < 0)
 		this.height = 0;
